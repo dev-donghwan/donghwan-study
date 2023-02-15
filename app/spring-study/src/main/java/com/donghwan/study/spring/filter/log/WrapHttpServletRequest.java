@@ -37,11 +37,9 @@ public class WrapHttpServletRequest extends HttpServletRequestWrapper {
         return new BufferedReader(new InputStreamReader(getInputStream()));
     }
 
-    public String getBody(String charsetName) {
+    public byte[] getContentAsByteArrays() {
         try {
-            InputStream inputStream = getInputStream();
-            Charset charset = Charset.forName(charsetName);
-            return StreamUtils.copyToString(inputStream, charset);
+            return getInputStream().readAllBytes();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -29,12 +29,8 @@ public class WrapHttpServletResponse extends HttpServletResponseWrapper {
         return cachedServletOutputStream;
     }
 
-    public String getBody(String charset) {
-        try {
-            return new String(cachedBytes.toByteArray(), charset);
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
+    public byte[] getContentAsByteArrays() {
+        return cachedBytes.toByteArray();
     }
 
     private static class CachedServletOutputStream extends ServletOutputStream {
