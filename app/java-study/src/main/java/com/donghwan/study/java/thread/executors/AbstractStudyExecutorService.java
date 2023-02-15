@@ -3,6 +3,7 @@ package com.donghwan.study.java.thread.executors;
 import java.util.Collection;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public abstract class AbstractStudyExecutorService {
@@ -19,6 +20,7 @@ public abstract class AbstractStudyExecutorService {
             this.executorService.invokeAll(callables);
             long endMills = System.currentTimeMillis();
             System.out.println("running... " + (endMills - startMills) + "(ms)");
+            this.executorService.shutdown();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
