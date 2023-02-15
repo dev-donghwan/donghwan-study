@@ -1,4 +1,4 @@
-package com.donghwan.study.java.thread.imple;
+package com.donghwan.study.java.thread.basic.imple;
 
 public class StudyRunnable implements Runnable {
 

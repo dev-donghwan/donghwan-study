@@ -1,4 +1,4 @@
-package com.donghwan.study.java.thread.extend;
+package com.donghwan.study.java.thread.basic.extend;
 
 public class StudyThread extends Thread {
 

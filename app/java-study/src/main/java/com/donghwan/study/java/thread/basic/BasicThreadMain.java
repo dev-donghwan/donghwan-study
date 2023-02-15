@@ -1,16 +1,16 @@
-package com.donghwan.study.java.thread;
+package com.donghwan.study.java.thread.basic;
 
-import com.donghwan.study.java.thread.extend.StudyThread;
-import com.donghwan.study.java.thread.imple.StudyRunnable;
+import com.donghwan.study.java.thread.basic.extend.StudyThread;
+import com.donghwan.study.java.thread.basic.imple.StudyRunnable;
 import java.util.ArrayList;
 
-public class AppMain {
+public class BasicThreadMain {
 
     public static void main(String[] args) {
         System.out.println("main " + Thread.currentThread().getName() + " start");
 
-//        sample1();
-//        sample2();
+        sample1();
+        sample2();
 
     }
 
