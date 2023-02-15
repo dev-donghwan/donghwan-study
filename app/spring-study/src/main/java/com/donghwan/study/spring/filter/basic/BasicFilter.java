@@ -1,4 +1,4 @@
-package com.donghwan.study.spring.filter;
+package com.donghwan.study.spring.filter.basic;
 
 import java.io.IOException;
 import javax.servlet.Filter;
