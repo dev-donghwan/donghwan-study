@@ -1,7 +1,9 @@
 rootProject.name = 'donghwan-study'
 
 include 'app'
-include 'app:spring-study'
 include 'app:java-study'
 include 'app:design-study'
+include 'app:spring-study'
+include 'app:spring-study:basic'
+include 'app:spring-study:chatting-ws'
 
