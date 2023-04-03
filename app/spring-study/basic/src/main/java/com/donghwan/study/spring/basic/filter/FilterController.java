@@ -1,7 +1,7 @@
 package com.donghwan.study.spring.basic.filter;
 
-import com.donghwan.study.spring.filter.log.dto.LogRequestDto;
-import com.donghwan.study.spring.filter.log.dto.LogResponseDto;
+import com.donghwan.study.spring.basic.filter.log.dto.LogRequestDto;
+import com.donghwan.study.spring.basic.filter.log.dto.LogResponseDto;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
