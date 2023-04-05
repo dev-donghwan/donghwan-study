@@ -28,34 +28,42 @@ public class RequestAndResponseLogFilter extends OncePerRequestFilter {
         WrapHttpServletRequest req = new WrapHttpServletRequest(request);
         WrapHttpServletResponse res = new WrapHttpServletResponse(response);
 
-        if (isVisible(MediaType.valueOf(req.getContentType()))) {
-            try {
-                String reqCharterEncoding = req.getCharacterEncoding() == null ? StandardCharsets.UTF_8.name() : req.getCharacterEncoding();
-                String reqBodyString = new String(req.getContentAsByteArrays(), reqCharterEncoding);
-                String reqPrettyPrint = this.prettyPrint(reqBodyString);
-                log.info("{} Request Body : {}", TAG, reqPrettyPrint);
-            } catch (Exception e) {
-                log.error("{} request exception {}", TAG, e);
+        try {
+            if (req.getContentType() != null && isVisible(MediaType.valueOf(req.getContentType()))) {
+                try {
+                    String reqCharterEncoding = req.getCharacterEncoding() == null ? StandardCharsets.UTF_8.name() : req.getCharacterEncoding();
+                    String reqBodyString = new String(req.getContentAsByteArrays(), reqCharterEncoding);
+                    String reqPrettyPrint = this.prettyPrint(reqBodyString);
+                    log.info("{} Request Body : {}", TAG, reqPrettyPrint);
+                } catch (Exception e) {
+                    log.error("{} request exception {}", TAG, e);
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         filterChain.doFilter(req, res);
 
-        if (isVisible(MediaType.valueOf(req.getContentType()))) {
-            try {
-                String resCharacterEncoding = res.getCharacterEncoding();
-                String resBodyString = new String(res.getContentAsByteArrays(), resCharacterEncoding);
-                String resPrettyPrint = this.prettyPrint(resBodyString);
-                log.info("{} Response Body : {}", TAG, resPrettyPrint);
+        try {
+            if (res.getContentType() != null && isVisible(MediaType.valueOf(res.getContentType()))) {
+                try {
+                    String resCharacterEncoding = res.getCharacterEncoding();
+                    String resBodyString = new String(res.getContentAsByteArrays(), resCharacterEncoding);
+                    String resPrettyPrint = this.prettyPrint(resBodyString);
+                    log.info("{} Response Body : {}", TAG, resPrettyPrint);
 
-                byte[] responseMessageBytes = resBodyString.getBytes(resCharacterEncoding);
-                int responseContentLength = responseMessageBytes.length;
-                response.setContentLength(responseContentLength);
-                response.getOutputStream().write(responseMessageBytes);
-                response.flushBuffer();
-            } catch (Exception e) {
-                log.error("{} response exception {}", TAG, e);
+                    byte[] responseMessageBytes = resBodyString.getBytes(resCharacterEncoding);
+                    int responseContentLength = responseMessageBytes.length;
+                    response.setContentLength(responseContentLength);
+                    response.getOutputStream().write(responseMessageBytes);
+                    response.flushBuffer();
+                } catch (Exception e) {
+                    log.error("{} response exception {}", TAG, e);
+                }
             }
+        } catch (Exception e) {
+
         }
     }
 
