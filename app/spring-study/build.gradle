@@ -28,6 +28,9 @@ subprojects {
         implementation 'org.springframework.boot:spring-boot-starter-web'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+        // Redis
+        implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
         // Lombok
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
