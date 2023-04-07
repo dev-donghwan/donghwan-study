@@ -1,5 +1,6 @@
-package com.donghwan.study.spring.basic.redis.entity;
+package com.donghwan.study.spring.basic.redis.repository.entity;
 
+import java.io.Serializable;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import org.springframework.data.redis.core.RedisHash;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 
 @RedisHash("sample")
-public class Sample {
+public class Sample implements Serializable {
 
     @Id
     private String id;
