@@ -6,4 +6,5 @@ include 'app:design-study'
 include 'app:spring-study'
 include 'app:spring-study:basic'
 include 'app:spring-study:chatting-ws'
+include 'app:spring-study:company-async'
 
