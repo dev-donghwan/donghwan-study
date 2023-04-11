@@ -10,6 +10,7 @@
         </processorPath>
         <module name="donghwan-study.app.spring-study.basic.main" />
         <module name="donghwan-study.app.spring-study.chatting-ws.main" />
+        <module name="donghwan-study.app.spring-study.company-async.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11" />
