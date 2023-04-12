@@ -1,4 +1,4 @@
-package com.donghwan.study.spring.companyasync.first.task.manager;
+package com.donghwan.study.spring.companyasync.first;
 
 import com.donghwan.study.spring.companyasync.first.dto.TaskDto;
 import com.donghwan.study.spring.companyasync.first.dto.TaskType;
@@ -11,9 +11,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 @Slf4j
-public class TaskManager {
+public class FirstTaskManager {
+
+    private final Executor executor = Executors.newSingleThreadExecutor();
 
     private final Map<TaskType, AbstractTask> tasks = new HashMap<>();
 
@@ -24,11 +28,12 @@ public class TaskManager {
     }
 
     public void input(Object data) {
-        log.info("start mills : {}", System.currentTimeMillis());
-        this.enqueue(TaskDto.of(data));
+        executor.execute(() -> enqueue(TaskDto.of(data)));
     }
 
     private void enqueue(TaskDto dto) {
+        log.info("{} {} start mills : {}", getClass().getSimpleName(), Thread.currentThread().getName(), System.currentTimeMillis());
+
         TaskType type = dto.getType();
 
         if (type == null || !TaskType.isContains(type)) {
@@ -51,7 +56,7 @@ public class TaskManager {
             TaskType type = dto.getType();
 
             AbstractTask task = tasks.get(type);
-            task.processing(dto, result -> Arrays.stream(result).forEach(this::enqueue));
+            task.processing(dto, result -> Arrays.stream(result).forEach(x -> executor.execute(() -> enqueue(x))));
         }
     }
 }
