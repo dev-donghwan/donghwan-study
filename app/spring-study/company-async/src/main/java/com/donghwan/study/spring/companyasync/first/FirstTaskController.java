@@ -1,6 +1,5 @@
-package com.donghwan.study.spring.companyasync.first.task;
+package com.donghwan.study.spring.companyasync.first;
 
-import com.donghwan.study.spring.companyasync.first.task.manager.TaskManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,9 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
-public class TaskController {
+public class FirstTaskController {
 
-    private final TaskManager manager;
+    private final FirstTaskManager manager;
 
     @PostMapping("/api/v1/first-data")
     public void data(@RequestBody Object input) {
