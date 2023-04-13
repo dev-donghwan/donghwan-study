@@ -1,11 +1,11 @@
 package com.donghwan.study.spring.companyasync.config;
 
 import com.donghwan.study.spring.companyasync.second.SecondTaskManager;
-import com.donghwan.study.spring.companyasync.first.task.module.FirstTask;
-import com.donghwan.study.spring.companyasync.first.task.module.InitTask;
-import com.donghwan.study.spring.companyasync.first.task.module.SecondTask;
-import com.donghwan.study.spring.companyasync.first.task.module.SendResultTask;
-import com.donghwan.study.spring.companyasync.first.FirstTaskManager;
+import com.donghwan.study.spring.companyasync.first.task.module.FirstTaskExecutor;
+import com.donghwan.study.spring.companyasync.first.task.module.InitTaskExecutor;
+import com.donghwan.study.spring.companyasync.first.task.module.SecondTaskExecutor;
+import com.donghwan.study.spring.companyasync.first.task.module.SendResultTaskExecutor;
+import com.donghwan.study.spring.companyasync.first.FirstAsyncTaskManager;
 import com.donghwan.study.spring.companyasync.first.dto.TaskType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,13 +14,13 @@ import org.springframework.context.annotation.Configuration;
 public class TaskConfig {
 
     @Bean
-    public FirstTaskManager firstTaskManager() {
-        FirstTaskManager firstTaskManager = new FirstTaskManager();
-        firstTaskManager.addTask(TaskType.INIT, new InitTask());
-        firstTaskManager.addTask(TaskType.FIRST, new FirstTask());
-        firstTaskManager.addTask(TaskType.SECOND, new SecondTask());
-        firstTaskManager.addTask(TaskType.SEND_RESULT, new SendResultTask());
-        return firstTaskManager;
+    public FirstAsyncTaskManager firstTaskManager() {
+        FirstAsyncTaskManager firstAsyncTaskManager = new FirstAsyncTaskManager();
+        firstAsyncTaskManager.addAsyncTaskExecutor(TaskType.INIT, new InitTaskExecutor(5));
+        firstAsyncTaskManager.addAsyncTaskExecutor(TaskType.FIRST, new FirstTaskExecutor(5));
+        firstAsyncTaskManager.addAsyncTaskExecutor(TaskType.SECOND, new SecondTaskExecutor(5));
+        firstAsyncTaskManager.addAsyncTaskExecutor(TaskType.SEND_RESULT, new SendResultTaskExecutor(5));
+        return firstAsyncTaskManager;
     }
 
     @Bean
